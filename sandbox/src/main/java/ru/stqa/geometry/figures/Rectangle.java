@@ -5,7 +5,7 @@ public class Rectangle {
         System.out.println("Площадь прямоугольника со сторонами "+a+" "+ " и "+ b+" = "+ rectangleArea(a, b));
     }
 
-    private static double rectangleArea(double a, double b) {
+    public static double rectangleArea(double a, double b) {
         return a * b;
     }
 }
