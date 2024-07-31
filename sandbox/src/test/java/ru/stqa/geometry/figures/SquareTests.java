@@ -7,12 +7,13 @@ public class SquareTests {
 
     @Test
     void canCaculateArea(){
-        var result = Square.area(5.);
+        var s=new Square(5.0);
+        var result = s.area();
         Assertions.assertEquals(25.0,result);
     }
 
     @Test
     void canCaculatePerimitr(){
-        Assertions.assertEquals(20.0,Square.squarePerimetr(5.));
+        Assertions.assertEquals(20.0,new Square(5.).squarePerimetr());
     }
 }
