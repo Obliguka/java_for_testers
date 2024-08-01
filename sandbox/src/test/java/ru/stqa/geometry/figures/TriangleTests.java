@@ -7,14 +7,14 @@ public class TriangleTests {
     @Test
     void canCaculateArea(){
         var s=new Triangle(16.0, 12.0, 20.0);
-        var result = s.TriangleArea();
+        var result = s.triangleArea();
         Assertions.assertEquals(96.0,result);
     }
 
     @Test
     void canCaculatePerimitr(){
 
-        Assertions.assertEquals(48.0,new Triangle(16.0, 12.0, 20.0).TrianglePerimetr());
+        Assertions.assertEquals(48.0,new Triangle(16.0, 12.0, 20.0).trianglePerimetr());
     }
 
 }
