@@ -37,4 +37,25 @@ public class TriangleTests {
         }
     }
 
+    @Test
+    void testEquals(){
+        var s1=new Triangle(4.0, 5.0, 6.0);
+        var s2=new Triangle(5.0, 6.0, 4.0);
+        Assertions.assertEquals(s1, s2);
+    }
+
+    @Test
+    void testNotEquals(){
+        var s1=new Triangle(5.0, 6.0, 4.0);
+        var s2=new Triangle(8.0, 6.0, 4.0);
+        Assertions.assertNotEquals(s1, s2);
+    }
+
+    @Test
+    void testPass(){
+        var s1=new Triangle(4.0, 5.0, 6.0);
+        var s2=new Triangle(5.0, 6.0, 4.0);
+        Assertions.assertTrue(s1.equals(s2));
+    }
+
 }
