@@ -29,4 +29,39 @@ public class SquareTests {
 
         }
     }
+
+    @Test
+    void testEquals(){
+        var s1=new Square(5.0);
+        var s2=new Square(5.0);
+        Assertions.assertEquals(s1, s2);
+    }
+
+    @Test
+    void testNotEquals(){
+        var s1=new Square(5.0);
+        var s2=new Square(6.0);
+        Assertions.assertNotEquals(s1, s2);
+    }
+
+    @Test
+    void testFail(){
+        var s1=new Square(5.0);
+        var s2=new Square(5.0);
+        Assertions.assertTrue(s1==s2);
+    }
+
+    @Test
+    void testPass(){
+        var s1=new Square(5.0);
+        var s2=new Square(5.0);
+        Assertions.assertTrue(s1.equals(s2));
+    }
+
+    @Test
+    void testEqualsR(){
+        var s1=new Rectangle(5.0, 4.0);
+        var s2=new Rectangle(5.0, 4.0);
+        Assertions.assertEquals(s1, s2);
+    }
 }
