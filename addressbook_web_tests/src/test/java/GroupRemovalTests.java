@@ -30,7 +30,7 @@ public class GroupRemovalTests {
     }
 
     @Test
-    public void testad() {
+    public void canRemoveGroup() {
         if (! isElementPresent(By.name("new"))) {
 
             driver.findElement(By.linkText("groups")).click();
