@@ -3,12 +3,11 @@ package manage;
 import model.GroupData;
 import org.openqa.selenium.By;
 
-public class GroupHelper {
-    private ApplicationManager manager;
+public class GroupHelper extends HelperBase{
 
     public GroupHelper(ApplicationManager manager)
     {
-        this.manager = manager;
+        super(manager);
     }
 
     public void openGroupsPage() {
@@ -66,11 +65,6 @@ public class GroupHelper {
         type(By.name("group_footer"),group.footer());
     }
 
-    private void type(By locator, String text) {
-        click(locator);
-        manager.driver.findElement(locator).sendKeys(text);
-    }
-
     private void returnToGroupPage() {
         click(By.linkText("group page"));
     }
@@ -87,7 +81,4 @@ public class GroupHelper {
         click(By.name("selected[]"));
     }
 
-    private void click(By locator) {
-        manager.driver.findElement(locator).click();
-    }
 }
