@@ -1,7 +1,6 @@
 package manage;
 
 import model.ContactData;
-import model.GroupData;
 import org.openqa.selenium.By;
 
 public class ContactHelper extends HelperBase{
@@ -11,35 +10,64 @@ public class ContactHelper extends HelperBase{
     }
 
     public void createdContact(ContactData contact) {
-        openContactsPage();
-        fillContactsForm();
+        openNewContactsPage();
+        fillContactsForm(contact);
         submitContactCreation();
         returnToContactsPage();
     }
 
-    private void returnToContactsPage() {
-        manager.driver.findElement(By.linkText("home page")).click();
+    public void removalContact() {
+        openContactsPage();
+        selectContact();
+        submitRemovalContact();
     }
 
-    private void submitContactCreation() {
-        manager.driver.findElement(By.name("submit")).click();
+    private void openContactsPage()
+    {
+        click(By.linkText("home"));
     }
 
-    private void fillContactsForm() {
-        //manager.driver.findElement(By.name("theform")).click();
-        type(By.name("firstname"),"Mary");
-        type(By.name("middlename"),"Gig");
-        type(By.name("lastname"),"Nnn");
-        type(By.name("nickname"),"Mary_12");
-        type(By.name("address"),"Voronezh, Svobody street, 96");
-        type(By.name("home"),"9090");
-        type(By.name("mobile"),"8974765345");
-        type(By.name("work"),"00888");
-        type(By.name("email"),"mary.g@kk.com");
-        //driver.findElement(By.name("new_group")).click();
+    private void submitRemovalContact()
+    {
+        click(By.cssSelector(".left:nth-child(8) > input"));
     }
 
-    private void openContactsPage() {
-        manager.driver.findElement(By.linkText("add new")).click();
+    private void selectContact()
+    {
+        click(By.name("selected[]"));
+    }
+
+    private void returnToContactsPage()
+    {
+        click(By.linkText("home page"));
+    }
+
+    private void submitContactCreation()
+    {
+        click(By.name("submit"));
+    }
+
+    private void fillContactsForm(ContactData contact)
+    {
+        type(By.name("firstname"),contact.firstname());
+        type(By.name("middlename"),contact.middlename());
+        type(By.name("lastname"),contact.lastname());
+        type(By.name("nickname"),contact.nickname());
+        type(By.name("address"),contact.address());
+        type(By.name("home"),contact.home());
+        type(By.name("mobile"),contact.mobile());
+        type(By.name("work"),contact.work());
+        type(By.name("email"),contact.email());
+    }
+
+    private void openNewContactsPage()
+    {
+        click(By.linkText("add new"));
+    }
+
+    public boolean isContactPresent()
+    {
+        openContactsPage();
+        return manager.isElementPresent(By.name("selected[]"));
     }
 }

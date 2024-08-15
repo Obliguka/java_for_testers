@@ -11,18 +11,21 @@ public class GroupHelper extends HelperBase{
     }
 
     public void openGroupsPage() {
-        if (!manager.isElementPresent(By.name("new"))) {
+        if (!manager.isElementPresent(By.name("new")))
+        {
 
             click(By.linkText("groups"));
         }
     }
 
-    public boolean isGroupPresent() {
+    public boolean isGroupPresent()
+    {
         openGroupsPage();
         return manager.isElementPresent(By.name("selected[]"));
     }
 
-    public void createdGroup(GroupData group) {
+    public void createdGroup(GroupData group)
+    {
         openGroupsPage();
         initGroupCreation();
         fillGroupForm(group);
@@ -35,7 +38,8 @@ public class GroupHelper extends HelperBase{
         removeSelectedGroup();
         returnToGroupPage();
     }
-    public void modifyGroup(GroupData group) {
+    public void modifyGroup(GroupData group)
+    {
         openGroupsPage();
         selectGroup();
         initGroupModification();
@@ -44,40 +48,48 @@ public class GroupHelper extends HelperBase{
         returnToGroupPage();
 
     }
-    private void removeSelectedGroup() {
+    private void removeSelectedGroup()
+    {
         click(By.name("delete"));
     }
 
 
-    private void submitGroupCreation() {
+    private void submitGroupCreation()
+    {
         click(By.name("submit"));
     }
 
 
-    private void initGroupCreation() {
+    private void initGroupCreation()
+    {
         click(By.name("new"));
     }
 
 
-    private void fillGroupForm(GroupData group) {
+    private void fillGroupForm(GroupData group)
+    {
         type(By.name("group_name"),group.name());
         type(By.name("group_header"),group.header());
         type(By.name("group_footer"),group.footer());
     }
 
-    private void returnToGroupPage() {
+    private void returnToGroupPage()
+    {
         click(By.linkText("group page"));
     }
 
-    private void submitGroupModification() {
+    private void submitGroupModification()
+    {
         click(By.name("update"));
     }
 
-    private void initGroupModification() {
+    private void initGroupModification()
+    {
         click(By.name("edit"));
     }
 
-    private void selectGroup() {
+    private void selectGroup()
+    {
         click(By.name("selected[]"));
     }
 
