@@ -12,6 +12,8 @@ public class ApplicationManager {
     private LoginHelper session;
     private GroupHelper groups;
 
+    private ContactHelper contact;
+
     public void init(String browser) {
         if (driver == null) {
             if ("chrome".equals(browser))
@@ -59,5 +61,15 @@ public class ApplicationManager {
             groups=new GroupHelper(this);
         }
         return groups;
+    }
+
+    public ContactHelper contact()
+    {
+        if (contact==null)
+        {
+            contact=new ContactHelper(this);
+        }
+
+        return contact;
     }
 }
