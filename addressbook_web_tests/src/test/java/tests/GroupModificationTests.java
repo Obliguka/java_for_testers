@@ -8,8 +8,8 @@ public class GroupModificationTests extends TestBase{
     @Test
     void TestModifyGroup()
     {
-        if (!TestBase.app.groups().isGroupPresent()){
-            TestBase.app.groups().createdGroup(new GroupData("", "", ""));
+        if (!app.groups().isGroupPresent()){
+            app.groups().createdGroup(new GroupData("", "", ""));
         }
         app.groups().modifyGroup(new GroupData().withName("modified name"));
     }

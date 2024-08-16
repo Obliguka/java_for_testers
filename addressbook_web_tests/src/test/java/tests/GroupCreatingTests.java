@@ -7,7 +7,7 @@ public class GroupCreatingTests extends TestBase {
 
     @Test
     public void canCreatedGroup() {
-        TestBase.app.groups().createdGroup(new GroupData("name", "header", "footer"));
+        app.groups().createdGroup(new GroupData("name", "header", "footer"));
 
     }
 
@@ -15,13 +15,13 @@ public class GroupCreatingTests extends TestBase {
     public void canCreatedGroupWithEmptyName() {
 
 
-        TestBase.app.groups().createdGroup(new GroupData("", "", ""));
+        app.groups().createdGroup(new GroupData("", "", ""));
     }
 
     @Test
     public void canCreatedGroupWithNameOnly() {
 
 
-        TestBase.app.groups().createdGroup(new GroupData().withName("some Name"));
+        app.groups().createdGroup(new GroupData().withName("some Name"));
     }
 }
