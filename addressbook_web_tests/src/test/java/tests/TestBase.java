@@ -23,6 +23,11 @@ public class TestBase {
             result=result+(char)('a'+rnd.nextInt(26));
         }
 
+        if (n<20)
+        {
+            result=result+'\'';
+        }
+
         return result;
 
 

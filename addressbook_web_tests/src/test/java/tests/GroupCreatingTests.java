@@ -4,12 +4,13 @@ import model.GroupData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class GroupCreatingTests extends TestBase {
 
-    @Test
-    public void canCreatedGroup() {
+public class GroupCreatingTests extends TestBase {
+    @ParameterizedTest
+    @ValueSourse(strings={"group_name", "group_name'"})
+    public void canCreatedGroup(String name) {
         int groupCount=app.groups().getCount();
-        app.groups().createdGroup(new GroupData("name", "header", "footer"));
+        app.groups().createdGroup(new GroupData(name, "header", "footer"));
         int newGroupCount=app.groups().getCount();
         Assertions.assertEquals(groupCount+1,newGroupCount);
 
