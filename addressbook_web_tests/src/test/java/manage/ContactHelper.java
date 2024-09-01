@@ -70,4 +70,9 @@ public class ContactHelper extends HelperBase{
         openContactsPage();
         return manager.isElementPresent(By.name("selected[]"));
     }
+
+    public int getCount() {
+        openContactsPage();
+        return manager.driver.findElements(By.name("selected[]")).size();
+    }
 }
