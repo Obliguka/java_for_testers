@@ -8,6 +8,7 @@ public class ContactRemovalTests extends TestBase {
     if (!app.contact().isContactPresent()){
       app.contact().createdContact(new ContactData());
     }
+
       app.contact().removalContact();
   }
 }
