@@ -1,7 +1,6 @@
 package manage;
 
 import model.ContactData;
-import model.GroupData;
 import org.openqa.selenium.By;
 
 import java.util.ArrayList;
@@ -20,8 +19,8 @@ public class ContactHelper extends HelperBase{
         returnToContactsPage();
     }
 
-    public void removalContact(GroupData contact) {
-        openContactsPage();
+    public void removalContact(ContactData contact) {
+        //openContactsPage();
         selectContact(contact);
         submitRemovalContact();
     }
@@ -82,7 +81,7 @@ public class ContactHelper extends HelperBase{
         return manager.driver.findElements(By.name("selected[]")).size();
     }
 
-    public List<GroupData> getList() {
+    public List<ContactData> getList() {
         openContactsPage();
         var contacts=new ArrayList<ContactData>();
         var spans=manager.driver.findElements(By.cssSelector("td.center input"));
