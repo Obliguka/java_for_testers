@@ -24,7 +24,7 @@ public record ContactData(String id, String firstname, String middlename, String
 
 
     public ContactData withId(String id) {
-        return new ContactData(id, this.firstname, this.middlename, lastname,
+        return new ContactData(id, this.firstname, this.middlename, this.lastname,
                 this.nickname,this.address,this.home,this.mobile,this.work,this.email);
     }
 }

@@ -77,18 +77,37 @@ public class ContactHelper extends HelperBase{
     }
 
     public int getCount() {
-        openContactsPage();
+        //openContactsPage();
         return manager.driver.findElements(By.name("selected[]")).size();
+    }
+
+    public void removeAllContacts() {
+        openContactsPage();
+        selectAllContacts();
+        removeSelectedContact();
+
+    }
+    private void removeSelectedContact()
+    {
+        click(By.cssSelector("input[value=\"Delete\"]"));
+    }
+    private void selectAllContacts() {
+        var checkboxes=manager.driver.findElements(By.name("selected[]"));
+
+        for (var checkbox : checkboxes)
+        {
+            checkbox.click();
+        }
     }
 
     public List<ContactData> getList() {
         openContactsPage();
         var contacts=new ArrayList<ContactData>();
-        var spans=manager.driver.findElements(By.cssSelector("td.center input"));
-        for (var span : spans){
-            var name=span.getText();
-            var checkbox=span.findElement(By.name("selected[]"));
-            var id=checkbox.getAttribute("id");
+        var centers=manager.driver.findElements(By.cssSelector("td.center input"));
+        for (var cen : centers){
+            var name=cen.getText();
+            //var checkbox=span.findElement(By.name("selected[]"));
+            var id=cen.getAttribute("id");
             contacts.add(new ContactData().withId(id).withFirstName(name));
         }
 

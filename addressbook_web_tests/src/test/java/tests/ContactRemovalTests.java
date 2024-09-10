@@ -17,7 +17,7 @@ public class ContactRemovalTests extends TestBase {
             "", "", "","","",
             "","",""));
   }
-  int contactCount=app.contact().getCount();
+ // int contactCount=app.contact().getCount();
    List <ContactData> oldContacts=app.contact().getList();
   var rnd=new Random();
   var index=rnd.nextInt(oldContacts.size());
@@ -27,8 +27,20 @@ public class ContactRemovalTests extends TestBase {
   var expectedList=new ArrayList<>(oldContacts);
         expectedList.remove(index);
 
-  int newGroupCount=app.contact().getCount();
+  //int newGroupCount=app.contact().getCount();
   Assertions.assertEquals(newContacts,expectedList);
 }
+
+    @Test
+    void canRemovalAllContactsAtOnce(){
+        if (app.contact().getCount()==0){
+            app.contact().createdContact(new ContactData("",
+                    "","","","",
+                    "","", "", "", ""));
+        }
+        app.contact().removeAllContacts();
+        Assertions.assertEquals(0,app.contact().getCount());
+
+    }
 
 }
