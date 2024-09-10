@@ -17,7 +17,7 @@ public class CreationContactTests extends TestBase {
       for (var middlename : List.of("", "contact middlename")) {
         for (var lastname : List.of("", "contact lastname")) {
           for (var nickname : List.of("", "contact nickname")) {
-            result.add(new ContactData(firstname, middlename, lastname, nickname, "", "", "", "", ""));
+            result.add(new ContactData("",firstname, middlename, lastname, nickname, "", "", "", "", ""));
           }
         }
       }
@@ -25,7 +25,7 @@ public class CreationContactTests extends TestBase {
 
     for(int i=0;i<5;i++)
     {
-      result.add(new ContactData(randomString(i*10),randomString(i*10),
+      result.add(new ContactData("",randomString(i*10),randomString(i*10),
               randomString(i*10), randomString(i*10),randomString(i*10),
               randomString(i*10),randomString(i*10),randomString(i*10),
               randomString(i*10)));
