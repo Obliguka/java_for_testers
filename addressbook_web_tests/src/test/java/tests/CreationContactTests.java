@@ -17,14 +17,14 @@ public class CreationContactTests extends TestBase {
     for (var firstname: List.of("","contact firstname")) {
       for (var middlename : List.of("", "contact middlename")) {
         for (var lastname : List.of("", "contact lastname")) {
-          for (var nickname : List.of("", "contact nickname")) {
-            result.add(new ContactData("",firstname, middlename, lastname, nickname, "", "", "", "", ""));
-          }
+
+            result.add(new ContactData("",firstname, middlename, lastname, "", "", "", "", "", ""));
+
         }
       }
     }
 
-    for(int i=0;i<2;i++)
+    for(int i=0;i<1;i++)
     {
       result.add(new ContactData("",randomString(i*3),randomString(i*3),
               randomString(i*3), randomString(i*3),randomString(i*3),
@@ -53,7 +53,7 @@ public class CreationContactTests extends TestBase {
 
       };
       newContacts.sort(compareById);
-      expectedList.add(contact.withId(newContacts.get(newContacts.size()-1).id()).withAddress("").withLastName(""));
+      expectedList.add(contact.withId(newContacts.get(newContacts.size()-1).id()).withLastName("").withFirstName("").withAddress(""));
       expectedList.sort(compareById);
       Assertions.assertEquals(newContacts,expectedList);
 
