@@ -15,10 +15,10 @@ public class CreationContactTests extends TestBase {
     var result=new ArrayList<ContactData>();
 
     for (var firstname: List.of("","contact firstname")) {
-      for (var middlename : List.of("", "contact middlename")) {
+      for (var address : List.of("", "contact middlename")) {
         for (var lastname : List.of("", "contact lastname")) {
 
-            result.add(new ContactData("",firstname, middlename, lastname, "", "", "", "", "", ""));
+            result.add(new ContactData("",firstname, "", lastname, "", address, "", "", "", ""));
 
         }
       }

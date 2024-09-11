@@ -123,7 +123,7 @@ public class ContactHelper extends HelperBase{
 
 
             var checkbox=cen.findElement(By.name("selected[]"));
-            var id=cen.getAttribute("id");
+            var id=checkbox.getAttribute("id");
 
             contacts.add(new ContactData().withId(id).withLastName(lastN).withFirstName(firstN).withAddress(addressN));
         }
