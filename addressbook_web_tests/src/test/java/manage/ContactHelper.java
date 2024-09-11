@@ -132,4 +132,28 @@ public class ContactHelper extends HelperBase{
         return contacts;
 
     }
+
+    public void modifyContact(ContactData contact, ContactData modifiedContact) {
+
+        openContactsPage();
+        selectContact(contact);
+        initContactModification();
+        fillContactForm(modifiedContact);
+        submitContactModification();
+        //returnToContactPage();
+    }
+
+    private void submitContactModification() {
+        click(By.name("update"));
+    }
+
+    private void fillContactForm(ContactData contact) {
+        type(By.name("firstname"),contact.firstname());
+        type(By.name("lastname"),contact.lastname());
+        type(By.name("address"),contact.address());
+    }
+
+    private void initContactModification() {
+        click(By.cssSelector("td.center [title=\"Edit\"]"));
+    }
 }
