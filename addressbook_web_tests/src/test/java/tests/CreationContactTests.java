@@ -53,7 +53,7 @@ public class CreationContactTests extends TestBase {
 
       };
       newContacts.sort(compareById);
-      expectedList.add(contact.withId(newContacts.get(newContacts.size()-1).id()).withLastName("").withFirstName("").withAddress(""));
+      expectedList.add(contact.withId(newContacts.get(newContacts.size()-1).id()));
       expectedList.sort(compareById);
       Assertions.assertEquals(newContacts,expectedList);
 
