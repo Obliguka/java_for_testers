@@ -63,6 +63,7 @@ public class ContactHelper extends HelperBase{
         type(By.name("mobile"),contact.mobile());
         type(By.name("work"),contact.work());
         type(By.name("email"),contact.email());
+        attach(By.name("photo"), contact.photo());
     }
 
     private void openNewContactsPage()
@@ -138,20 +139,13 @@ public class ContactHelper extends HelperBase{
         openContactsPage();
         selectContact(contact);
         initContactModification();
-        fillContactForm(modifiedContact);
+        fillContactsForm(modifiedContact);
         submitContactModification();
         //returnToContactPage();
     }
 
     private void submitContactModification() {
         click(By.name("update"));
-    }
-
-    private void fillContactForm(ContactData contact) {
-        type(By.name("firstname"),contact.firstname());
-        type(By.name("lastname"),contact.lastname());
-        type(By.name("address"),contact.address());
-        attach(By.name("photo"), contact.photo());
     }
 
     private void initContactModification() {
