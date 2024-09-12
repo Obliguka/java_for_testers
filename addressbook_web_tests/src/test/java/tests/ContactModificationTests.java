@@ -13,7 +13,7 @@ public class ContactModificationTests extends TestBase{
     void TestModifyContacts()
     {
         if (app.contact().getCount()==0){
-            app.contact().createdContact(new ContactData("","","","","","","","","",""));
+            app.contact().createdContact(new ContactData("","","","","","","","","","", ""));
         }
 
         var oldContact=app.contact().getList();

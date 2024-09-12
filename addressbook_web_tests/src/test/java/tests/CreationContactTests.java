@@ -2,6 +2,7 @@ package tests;
 
 import model.ContactData;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -18,7 +19,7 @@ public class CreationContactTests extends TestBase {
       for (var address : List.of("", "contact middlename")) {
         for (var lastname : List.of("", "contact lastname")) {
 
-            result.add(new ContactData("",firstname, "", lastname, "", address, "", "", "", ""));
+            result.add(new ContactData("",firstname, "", lastname, "", address, "", "", "", "", ""));
 
         }
       }
@@ -29,7 +30,7 @@ public class CreationContactTests extends TestBase {
       result.add(new ContactData("",randomString(i*3),randomString(i*3),
               randomString(i*3), randomString(i*3),randomString(i*3),
               randomString(i*3),randomString(i*3),randomString(i*3),
-              randomString(i*3)));
+              randomString(i*3), ""));
     }
     return result;
 
@@ -59,12 +60,15 @@ public class CreationContactTests extends TestBase {
 
   }
 
-  /*@Test
-  public void canCreatedContact()
+  @Test
+  public void canCreatedContactWithPhoto()
   {
-    app.contact().createdContact(new ContactData("firstname", "middlename", "lastname",
-            "nickname","address","home","mobile","work","email@rr.com"));
-  }
+    var contact=new ContactData().
+            withFirstName(randomString(10)).
+            withLastName(randomString(10)).
+            withPhoto("src/test/resources/images/avatar.png");
+    app.contact().createdContact(contact);
+  }/*
   @Test
   public void canCreatedContactWithEmptyFields()
   {

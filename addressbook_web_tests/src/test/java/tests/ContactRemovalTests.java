@@ -15,7 +15,7 @@ public class ContactRemovalTests extends TestBase {
    if (app.contact().getCount()==0){
     app.contact().createdContact(new ContactData("","",
             "", "", "","","",
-            "","",""));
+            "","","", ""));
   }
  // int contactCount=app.contact().getCount();
    List <ContactData> oldContacts=app.contact().getList();
@@ -36,7 +36,7 @@ public class ContactRemovalTests extends TestBase {
         if (app.contact().getCount()==0){
             app.contact().createdContact(new ContactData("",
                     "","","","",
-                    "","", "", "", ""));
+                    "","", "", "", "", ""));
         }
         app.contact().removeAllContacts();
         Assertions.assertEquals(0,app.contact().getCount());

@@ -151,6 +151,7 @@ public class ContactHelper extends HelperBase{
         type(By.name("firstname"),contact.firstname());
         type(By.name("lastname"),contact.lastname());
         type(By.name("address"),contact.address());
+        attach(By.name("photo"), contact.photo());
     }
 
     private void initContactModification() {
