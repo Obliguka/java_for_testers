@@ -4,9 +4,14 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import common.CommonFunctions;
+import model.ContactData;
 import model.GroupData;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -47,12 +52,22 @@ public class Generator {
         //mapper.writeValue(new File(output), data);
          var json=mapper.writeValueAsString(data);
 
-        }else {
+         try (var writer = new FileWriter(output)) {
+            writer.write(json);
+        }}if ("yaml".equals(format)){
+             var mapper1=new YAMLMapper();
+             mapper1.writeValue(new File(output),data);
+        }if ("xml".equals(format)){
+        var mapper1=new XmlMapper();
+        mapper1.writeValue(new File(output),data);
+         }
+         else {
             throw new IllegalArgumentException("Неизвестный формат данных "+format);
         }
-
-
     }
+
+
+
 
     private Object generate(){
         if ("groups".equals(type)){
@@ -64,6 +79,8 @@ public class Generator {
         }
 
     }
+
+
 
     private Object generateGroups() {
         var result=new ArrayList<GroupData>();
@@ -78,6 +95,15 @@ public class Generator {
     }
 
     private Object generateContacts() {
-        return null;
+        var result=new ArrayList<ContactData>();
+        for(int i=0;i<count;i++)
+        {
+          result.add(new ContactData().
+                withFirstName(CommonFunctions.randomString(10)).
+                withLastName(CommonFunctions.randomString(10)).
+                withAddress(CommonFunctions.randomString(10)));
+        }
+
+        return result;
     }
 }

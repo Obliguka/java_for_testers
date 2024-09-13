@@ -1,13 +1,15 @@
 package tests;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import model.GroupData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -35,8 +37,22 @@ public class GroupCreatingTests extends TestBase {
                     withHeader(CommonFunctions.randomString(i*10)).
                     withFooter(CommonFunctions.randomString(i*10)));
         }*/
-        ObjectMapper mapper = new ObjectMapper();
-        var value = mapper.readValue(new File("groups.json"), new TypeReference <List<GroupData>>() {});
+        var json="";
+        try (var resder=new FileReader("groups.json");
+             var breader=new BufferedReader(resder))
+        {
+             var line= breader.readLine();
+             while(line !=null){
+                 json=json+line;
+                 line=breader.readLine();
+             }
+
+        }
+        //var json = Files.readString(Paths.get("groups.json"));
+        //ObjectMapper mapper = new ObjectMapper();
+        var mapper = new XmlMapper();
+        var value = mapper.readValue(new File("groups.xml"), new TypeReference <List<GroupData>>() {});
+        //var value = mapper.readValue(new File("groups.json"), new TypeReference <List<GroupData>>() {});
         result.addAll(value);
 
         return result;
