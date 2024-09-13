@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import common.CommonFunctions;
 import model.GroupData;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -45,7 +44,9 @@ public class Generator {
         {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        mapper.writeValue(new File(output), data);
+        //mapper.writeValue(new File(output), data);
+         var json=mapper.writeValueAsString(data);
+
         }else {
             throw new IllegalArgumentException("Неизвестный формат данных "+format);
         }

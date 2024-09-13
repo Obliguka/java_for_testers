@@ -39,7 +39,7 @@ public class ContactHelper extends HelperBase{
     {
 
        // click(By.name("selected[]"));
-        click(By.cssSelector(String.format("input[id='%s']", contact.id())));
+        click(By.cssSelector(String.format("[href=\"edit.php?id=%s\"]", contact.id())));//"input[id='%s']", contact.id())));
     }
 
     private void returnToContactsPage()
@@ -63,7 +63,7 @@ public class ContactHelper extends HelperBase{
         type(By.name("mobile"),contact.mobile());
         type(By.name("work"),contact.work());
         type(By.name("email"),contact.email());
-        attach(By.name("photo"), contact.photo());
+        //attach(By.name("photo"), contact.photo());
     }
 
     private void openNewContactsPage()
@@ -138,7 +138,7 @@ public class ContactHelper extends HelperBase{
 
         openContactsPage();
         selectContact(contact);
-        initContactModification();
+        //initContactModification();
         fillContactsForm(modifiedContact);
         submitContactModification();
         //returnToContactPage();
