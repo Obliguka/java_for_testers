@@ -31,6 +31,10 @@ public class ContactHelper extends HelperBase{
         submitRemovalContact();
     }
 
+    private void selectContact(ContactData contact) {
+        click(By.cssSelector(String.format("input[id='%s']", contact.id())));
+    }
+
     private void openContactsPage()
     {
         click(By.linkText("home"));
@@ -41,7 +45,7 @@ public class ContactHelper extends HelperBase{
         click(By.cssSelector(".left:nth-child(8) > input"));
     }
 
-    private void selectContact(ContactData contact)
+    private void selectForModificationContact(ContactData contact)
     {
 
        // click(By.name("selected[]"));
@@ -156,9 +160,10 @@ public class ContactHelper extends HelperBase{
     public void modifyContact(ContactData contact, ContactData modifiedContact) {
 
         openContactsPage();
-        selectContact(contact);
+        selectForModificationContact(contact);
         //initContactModification();
-        fillContactsForm(modifiedContact);
+        //fillContactsForm(modifiedContact);
+        fillContactsWithoutPhotoForm(modifiedContact);
         submitContactModification();
         //returnToContactPage();
     }
