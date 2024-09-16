@@ -2,6 +2,7 @@ package tests;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import common.CommonFunctions;
 import model.GroupData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -59,6 +60,14 @@ public class GroupCreatingTests extends TestBase {
 
     }
 
+    public static List<GroupData> singleRandomGroup() {
+        return List.of(new GroupData().
+                withName(CommonFunctions.randomString(10)).
+                withHeader(CommonFunctions.randomString(20)).
+                withFooter(CommonFunctions.randomString(30)));
+
+    }
+
   /*  @ParameterizedTest
     @ValueSource(strings={"group_name","group_name'"})
     public void canCreatedGroup(String name) {
@@ -84,11 +93,12 @@ public class GroupCreatingTests extends TestBase {
     }*/
 
     @ParameterizedTest
-    @MethodSource("groupProvider")
-    public void canCreatedMultipleGroups(GroupData group) {
-        var oldGroups=app.groups().getList();
+    @MethodSource("singleRandomGroup")
+    public void canCreatedGroup(GroupData group) {
+        //var oldGroups=app.groups().getList();
+        var oldGroups=app.hbm().getGroupList();
         app.groups().createdGroup(group);
-        var newGroups=app.groups().getList();
+        var newGroups=app.hbm().getGroupList();
         var expectedList=new ArrayList<>(oldGroups);
 
         Comparator<GroupData> compareById = (o1, o2) -> {
@@ -96,9 +106,13 @@ public class GroupCreatingTests extends TestBase {
 
         };
         newGroups.sort(compareById);
-        expectedList.add(group.withId(newGroups.get(newGroups.size()-1).id()).withHeader("").withFooter(""));
+        var maxId=newGroups.get(newGroups.size()-1).id();
+
+        expectedList.add(group.withId(maxId));
         expectedList.sort(compareById);
         Assertions.assertEquals(newGroups,expectedList);
+
+       // var newUiGroaps=app.groups().getList();
     }
 
     public static List<GroupData> negativeGroupProvider() {
@@ -117,4 +131,6 @@ public class GroupCreatingTests extends TestBase {
             Assertions.assertEquals(newGroups,oldGroups);
 
     }
+
+
 }
