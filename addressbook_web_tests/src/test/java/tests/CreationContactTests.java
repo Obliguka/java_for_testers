@@ -136,4 +136,24 @@ public class CreationContactTests extends TestBase {
     Assertions.assertEquals(oldRelated.size()+1,newRelated.size());
   }
 
+  @ParameterizedTest
+  @MethodSource("contactProvider")
+  public void canCreatedContactsFromBD(ContactData contact)
+  {
+    var oldContacts=app.hbm().getContactList();
+    app.contact().createdContactWithoutPhoto(contact);
+    var newContacts=app.hbm().getContactList();
+    var expectedList=new ArrayList<>(oldContacts);
+
+    Comparator<ContactData> compareById = (o1, o2) -> {
+      return Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id()));
+
+    };
+    newContacts.sort(compareById);
+    expectedList.add(contact.withId(newContacts.get(newContacts.size()-1).id()));
+    expectedList.sort(compareById);
+    Assertions.assertEquals(newContacts,expectedList);
+
+  }
+
 }

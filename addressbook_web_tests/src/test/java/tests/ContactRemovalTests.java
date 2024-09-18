@@ -43,4 +43,26 @@ public class ContactRemovalTests extends TestBase {
 
     }
 
+    @Test
+    public void canRemovalContactFromBD() {
+
+        if (app.hbm().getContactCount()==0){
+            app.hbm().createdContact(new ContactData("","",
+                    "", "", "","","",
+                    "","","", ""));
+        }
+        // int contactCount=app.contact().getCount();
+        List <ContactData> oldContacts=app.hbm().getContactList();
+        var rnd=new Random();
+        var index=rnd.nextInt(oldContacts.size());
+
+        app.contact().removalContact(oldContacts.get(index));
+        List<ContactData> newContacts=app.hbm().getContactList();
+        var expectedList=new ArrayList<>(oldContacts);
+        expectedList.remove(index);
+
+        //int newGroupCount=app.contact().getCount();
+        Assertions.assertEquals(newContacts,expectedList);
+    }
+
 }
