@@ -1,6 +1,8 @@
 package manage;
 
+import manage.hbm.ContactRecord;
 import manage.hbm.GroupRecord;
+import model.ContactData;
 import model.GroupData;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AvailableSettings;
@@ -15,9 +17,9 @@ public class HibernateHelper extends HelperBase{
     {
         super(manager);
         sessionFactory = new Configuration()
-                //.addAnnotatedClass(Gr)
+                .addAnnotatedClass(ContactRecord.class)
                 .addAnnotatedClass(GroupRecord.class)
-                .setProperty(AvailableSettings.URL, "jdbc:mysql://localhost/addressbook")
+                .setProperty(AvailableSettings.URL, "jdbc:mysql://localhost/addressbook?zeroDateTimeBehavior=convertToNull")
                 .setProperty(AvailableSettings.USER, "root")
                 .setProperty(AvailableSettings.PASS, "")
                 .buildSessionFactory();
@@ -49,6 +51,12 @@ public class HibernateHelper extends HelperBase{
         }));
     }
 
+    public List<ContactData> getContactList() {
+        return converContacttList(sessionFactory.fromSession(session -> {
+            return session.createQuery("from ContactRecord", ContactRecord.class).list();
+        }));
+    }
+
 
     public long getGroupCount() {
         return sessionFactory.fromSession(session -> {
@@ -62,6 +70,50 @@ public class HibernateHelper extends HelperBase{
             session.persist(convert(groupData));
             session.getTransaction().commit();
 
+        });
+    }
+
+    public void createdContact(ContactData contactData) {
+        sessionFactory.inSession(session -> {
+            session.getTransaction().begin();
+            session.persist(convert(contactData));
+            session.getTransaction().commit();
+
+        });
+    }
+
+    static List<ContactData> converContacttList(List<ContactRecord> records){
+        List <ContactData> result=new ArrayList<>();
+        for (var record:records){
+            result.add(convert(record));
+        }
+        return result;
+    }
+
+    private static ContactRecord convert(ContactData data) {
+        var id=data.id();
+        if ("".equals(id)){
+            id="0";
+        }
+        return new ContactRecord(Integer.parseInt(id), data.firstname(), data.lastname(), data.address());
+    }
+
+    private static ContactData convert(ContactRecord record) {
+        return new ContactData().withId(""+record.id).
+                withFirstName(record.firstname).
+                withLastName(record.lastname).
+                withAddress(record.address);
+    }
+
+    public List<ContactData> getContactsInGroup(GroupData group) {
+        return sessionFactory.fromSession(session -> {
+            return converContacttList(session.get(GroupRecord.class, group.id()).contacts);
+        });
+    }
+
+    public long getContactCount() {
+        return sessionFactory.fromSession(session -> {
+            return session.createQuery("select count(*) from ContactRecord", Long.class).getSingleResult();
         });
     }
 }

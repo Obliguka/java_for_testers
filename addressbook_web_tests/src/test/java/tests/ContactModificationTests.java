@@ -38,4 +38,33 @@ public class ContactModificationTests extends TestBase{
         Assertions.assertEquals(newContact,expectedList);
     }
 
+    @Test
+    void TestModifyContactsFromBD()
+    {
+        if (app.hbm().getContactCount()==0){
+            app.hbm().createdContact(new ContactData("","","","","","","","","","", ""));
+        }
+
+        var oldContact=app.hbm().getContactList();
+        var rnd=new Random();
+        var index=rnd.nextInt(oldContact.size());
+
+        var testData = new ContactData().withFirstName("modified name").withLastName("modified name").withAddress("modified name");
+        app.contact().modifyContact(oldContact.get(index), testData);
+
+        var newContact=app.hbm().getContactList();
+        var expectedList=new ArrayList<>(oldContact);
+        expectedList.set(index, testData.withId(oldContact.get(index).id()));
+        Comparator<ContactData> compareById = (o1, o2) -> {
+            return Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id()));
+
+        };
+
+        newContact.sort(compareById);
+
+        expectedList.sort(compareById);
+
+        Assertions.assertEquals(newContact,expectedList);
+    }
+
 }
