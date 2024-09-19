@@ -23,7 +23,7 @@ public class ContactHelper extends HelperBase{
 
     public void create(ContactData contact, GroupData group) {
         openNewContactsPage();
-        fillContactsForm(contact);
+        fillContactsWithoutPhotoForm(contact);
         selectGroup(group);
         submitContactCreation();
         returnToContactsPage();
@@ -191,7 +191,5 @@ public class ContactHelper extends HelperBase{
         click(By.cssSelector("td.center [title=\"Edit\"]"));
     }
 
-    public void removeInGroup(ContactData contact, GroupData group) {
 
-    }
 }
