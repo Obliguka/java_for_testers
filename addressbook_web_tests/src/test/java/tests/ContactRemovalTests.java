@@ -1,9 +1,11 @@
 package tests;
 
 import model.ContactData;
+import model.GroupData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -63,6 +65,36 @@ public class ContactRemovalTests extends TestBase {
 
         //int newGroupCount=app.contact().getCount();
         Assertions.assertEquals(newContacts,expectedList);
+    }
+
+    @Test
+    public void canRemovalContactInGroup() throws SQLException {
+
+        if (app.hbm().getContactCount()==0){
+            app.hbm().createdContact(new ContactData("","",
+                    "", "", "","","",
+                    "","","", ""));
+        }
+
+        if (app.hbm().getGroupCount()==0){
+            app.hbm().createdGroup(new GroupData("", "", "", ""));
+        }
+
+        var group=app.hbm().getGroupList().get(0);
+        var contact=app.hbm().getContactList().get(0);
+
+        var oldRelated=app.hbm().getContactsInGroup(group);
+
+        if(oldRelated.size()==0){
+            app.contact().create(contact, group);
+        }
+
+        //var oldRelated1=app.hbm().getContactsInGroup(group);
+        
+        app.jdbc().removeContactInGroup(""+group.id());
+
+        var newRelated=app.hbm().getContactsInGroup(group);
+        Assertions.assertEquals(oldRelated.size()+1,newRelated.size());
     }
 
 }

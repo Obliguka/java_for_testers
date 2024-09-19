@@ -3,6 +3,7 @@ package manage;
 import model.GroupData;
 
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,5 +49,22 @@ public class JdbcHelper extends HelperBase{
             throw new RuntimeException(e);
         }
 
+    }
+
+    public void removeContactInGroup(String group_id) throws SQLException {
+        /*try (var conn=DriverManager.getConnection("jdbc:mysql://localhost/addressbook","root","");
+             var statement=conn.createStatement();
+             var result=statement.executeQuery("" +
+                     String.format("DELETE FROM address_in_groups WHERE id=%s and group_id=%s",contact_id, group_id)))
+        {
+            if (result.next()){
+                throw new IllegalStateException("DB is corrupted");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }*/
+        var conn=DriverManager.getConnection("jdbc:mysql://localhost/addressbook","root","");
+        PreparedStatement st = conn.prepareStatement(String.format("DELETE FROM address_in_groups WHERE group_id=%s limit 1", group_id));
     }
 }

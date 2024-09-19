@@ -190,4 +190,8 @@ public class ContactHelper extends HelperBase{
     private void initContactModification() {
         click(By.cssSelector("td.center [title=\"Edit\"]"));
     }
+
+    public void removeInGroup(ContactData contact, GroupData group) {
+
+    }
 }

@@ -116,4 +116,8 @@ public class HibernateHelper extends HelperBase{
             return session.createQuery("select count(*) from ContactRecord", Long.class).getSingleResult();
         });
     }
+
+    public void removeContactInGroup(ContactData contact, GroupData group) {
+
+    }
 }
