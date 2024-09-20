@@ -137,6 +137,29 @@ public class CreationContactTests extends TestBase {
     Assertions.assertEquals(oldRelated.size()+1,newRelated.size());
   }
 
+  @Test
+  public void canAddContactInGroup()
+  {
+    if (app.hbm().getContactCount()==0){
+      app.hbm().createdContact(new ContactData("","",
+              "", "", "","","",
+              "","","", ""));
+    }
+
+    var contact=app.hbm().getContactList().get(0);
+
+    if (app.hbm().getGroupCount()==0){
+      app.hbm().createdGroup(new GroupData("", "", "", ""));
+    }
+    
+    var group=app.hbm().getGroupList().get(0);
+
+    var oldRelated=app.hbm().getContactsInGroup(group);
+    app.contact().create(contact, group);
+    var newRelated=app.hbm().getContactsInGroup(group);
+    Assertions.assertEquals(oldRelated.size()+1,newRelated.size());
+  }
+
   @ParameterizedTest
   @MethodSource("contactProvider")
   public void canCreatedContactsFromBD(ContactData contact)
