@@ -61,14 +61,14 @@ public class CreationContactTests extends TestBase {
 
   }
 
-  @ParameterizedTest
+  /*@ParameterizedTest
   @MethodSource("contactProvider")
   public void canCreatedContacts(ContactData contact)
     {
     /*int contactCount=app.contact().getCount();
     app.contact().createdContact(contact);
     int newContactCount=app.contact().getCount();
-    Assertions.assertEquals(contactCount+1,newContactCount);*/
+    Assertions.assertEquals(contactCount+1,newContactCount);
       var oldContacts=app.contact().getList();
       app.contact().createdContactWithoutPhoto(contact);
       var newContacts=app.contact().getList();
@@ -93,7 +93,8 @@ public class CreationContactTests extends TestBase {
             withLastName(CommonFunctions.randomString(10)).
             withPhoto(randomFile("src/test/resources/images"));
     app.contact().createdContact(contact);
-  }/*
+  }*/
+  /*
   @Test
   public void canCreatedContactWithEmptyFields()
   {

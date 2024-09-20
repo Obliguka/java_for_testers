@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.Random;
 
 public class ContactModificationTests extends TestBase{
-    @Test
+    /* @Test
     void TestModifyContacts()
     {
         if (app.contact().getCount()==0){
@@ -36,7 +36,7 @@ public class ContactModificationTests extends TestBase{
         expectedList.sort(compareById);
 
         Assertions.assertEquals(newContact,expectedList);
-    }
+    }*/
 
     @Test
     void TestModifyContactsFromBD()

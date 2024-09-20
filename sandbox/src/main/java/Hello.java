@@ -23,7 +23,7 @@ public class Hello {
         System.out.println(configFile.getAbsoluteFile());
         System.out.println(configFile.exists());
 
-        System.out.printn(new File("").getAbsolutePath());
+        //System.out.printn(new File("").getAbsolutePath());
     //}
 
     /*private static int devide(int x, int y) {

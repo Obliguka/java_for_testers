@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class GroupRemovalTests extends TestBase {
 
-    @Test
+    /*@Test
     public void canRemoveGroup() {
 
         if (app.groups().getCount()==0){
@@ -37,7 +37,7 @@ public class GroupRemovalTests extends TestBase {
         app.groups().removeAllGroups();
         Assertions.assertEquals(0,app.groups().getCount());
 
-    }
+    }*/
 
     @Test
     public void canRemoveGroupFromDB() {

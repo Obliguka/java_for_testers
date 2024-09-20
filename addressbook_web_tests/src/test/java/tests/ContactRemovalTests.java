@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Random;
 
 public class ContactRemovalTests extends TestBase {
-  @Test
-  public void canRemovalContact() {
+  //@Test
+  /*public void canRemovalContact() {
 
    if (app.contact().getCount()==0){
     app.contact().createdContact(new ContactData("","",
@@ -43,7 +43,7 @@ public class ContactRemovalTests extends TestBase {
         app.contact().removeAllContacts();
         Assertions.assertEquals(0,app.contact().getCount());
 
-    }
+    }*/
 
     @Test
     public void canRemovalContactFromBD() {

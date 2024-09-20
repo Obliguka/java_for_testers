@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class GroupModificationTests extends TestBase{
 
-    @Test
+    /*@Test
     void TestModifyGroup()
     {
         if (app.groups().getCount()==0){
@@ -37,7 +37,7 @@ public class GroupModificationTests extends TestBase{
 
         Assertions.assertEquals(newGroups,expectedList);
 
-    }
+    }*/
 
     @Test
     void TestModifyGroupFromBD()
