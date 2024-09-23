@@ -8,8 +8,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HibernateHelper extends HelperBase{
     private SessionFactory sessionFactory;
@@ -26,11 +26,12 @@ public class HibernateHelper extends HelperBase{
     }
 
     static List<GroupData> convertList(List<GroupRecord> records){
-        List <GroupData> result=new ArrayList<>();
+        return records.stream().map(HibernateHelper::convert).collect(Collectors.toList());
+        /*List <GroupData> result=new ArrayList<>();
         for (var record:records){
             result.add(convert(record));
         }
-        return result;
+        return result;*/
     }
 
     private static GroupData convert(GroupRecord record) {
@@ -52,6 +53,7 @@ public class HibernateHelper extends HelperBase{
     }
 
     public List<ContactData> getContactList() {
+
         return converContacttList(sessionFactory.fromSession(session -> {
             return session.createQuery("from ContactRecord", ContactRecord.class).list();
         }));
@@ -83,11 +85,12 @@ public class HibernateHelper extends HelperBase{
     }
 
     static List<ContactData> converContacttList(List<ContactRecord> records){
-        List <ContactData> result=new ArrayList<>();
+        return records.stream().map(HibernateHelper::convert).collect(Collectors.toList());
+        /*List <ContactData> result=new ArrayList<>();
         for (var record:records){
             result.add(convert(record));
         }
-        return result;
+        return result;*/
     }
 
     private static ContactRecord convert(ContactData data) {
@@ -102,7 +105,11 @@ public class HibernateHelper extends HelperBase{
         return new ContactData().withId(""+record.id).
                 withFirstName(record.firstname).
                 withLastName(record.lastname).
-                withAddress(record.address);
+                withAddress(record.address).
+                withHome(record.home).
+                withMobile(record.mobile).
+                withWork(record.work).
+                withSecondary(record.phone2);
     }
 
     public List<ContactData> getContactsInGroup(GroupData group) {
@@ -117,7 +124,4 @@ public class HibernateHelper extends HelperBase{
         });
     }
 
-    public void removeContactInGroup(ContactData contact, GroupData group) {
-
-    }
 }

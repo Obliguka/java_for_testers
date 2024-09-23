@@ -143,7 +143,7 @@ public class CreationContactTests extends TestBase {
     if (app.hbm().getContactCount()==0){
       app.hbm().createdContact(new ContactData("","",
               "", "", "","","",
-              "","","", ""));
+              "","","", "", ""));
     }
 
     var contact=app.hbm().getContactList().get(0);
@@ -151,7 +151,7 @@ public class CreationContactTests extends TestBase {
     if (app.hbm().getGroupCount()==0){
       app.hbm().createdGroup(new GroupData("", "", "", ""));
     }
-    
+
     var group=app.hbm().getGroupList().get(0);
 
     var oldRelated=app.hbm().getContactsInGroup(group);

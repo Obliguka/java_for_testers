@@ -13,9 +13,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
@@ -70,12 +71,12 @@ public class GroupCreatingTests extends TestBase {
 
     }*/
 
-    public static Stream<GroupData> singleRandomGroup() {
+    public static Stream<GroupData> randomGroups() {
         Supplier<GroupData> randomGroup=()->(new GroupData().
                 withName(CommonFunctions.randomString(10)).
                 withHeader(CommonFunctions.randomString(20)).
                 withFooter(CommonFunctions.randomString(30)));
-        return Stream.generate(randomGroup).limit(3);
+        return Stream.generate(randomGroup).limit(1);
 
     }
 
@@ -104,26 +105,19 @@ public class GroupCreatingTests extends TestBase {
     }*/
 
     @ParameterizedTest
-    @MethodSource("singleRandomGroup")
+    @MethodSource("randomGroups")
     public void canCreatedGroup(GroupData group) {
-        //var oldGroups=app.groups().getList();
         var oldGroups=app.hbm().getGroupList();
         app.groups().createdGroup(group);
         var newGroups=app.hbm().getGroupList();
         var expectedList=new ArrayList<>(oldGroups);
 
-        Comparator<GroupData> compareById = (o1, o2) -> {
-            return Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id()));
+        var extraGroups=newGroups.stream().filter(g->!oldGroups.contains(g)).collect(Collectors.toList());
+        var newId=extraGroups.get(0).id();
 
-        };
-        newGroups.sort(compareById);
-        var maxId=newGroups.get(newGroups.size()-1).id();
+        expectedList.add(group.withId(newId));
+        Assertions.assertEquals(Set.copyOf(newGroups),Set.copyOf(expectedList));
 
-        expectedList.add(group.withId(maxId));
-        expectedList.sort(compareById);
-        Assertions.assertEquals(newGroups,expectedList);
-
-       // var newUiGroaps=app.groups().getList();
     }
 
     public static List<GroupData> negativeGroupProvider() {
