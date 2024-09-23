@@ -52,7 +52,7 @@ public class ContactRemovalTests extends TestBase {
             app.hbm().createdContact(new ContactData("","",
                     "", "", "","","",
                     "","", "",
-                  "", ""));
+                  "", "", "", ""));
         }
         // int contactCount=app.contact().getCount();
         List <ContactData> oldContacts=app.hbm().getContactList();
@@ -74,7 +74,7 @@ public class ContactRemovalTests extends TestBase {
         if (app.hbm().getContactCount()==0){
             app.hbm().createdContact(new ContactData("","",
                     "", "", "","","",
-                    "","","", "", ""));
+                    "","","", "", "", "", ""));
         }
 
         if (app.hbm().getGroupCount()==0){

@@ -16,6 +16,9 @@ public class ContactRecord {
     public String mobile;
     public String work;
     public String phone2;
+    public String email;
+    public String email2;
+    public String email3;
 
 
     public ContactRecord(){}
