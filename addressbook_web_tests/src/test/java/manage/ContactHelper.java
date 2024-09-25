@@ -32,6 +32,23 @@ public class ContactHelper extends HelperBase{
         returnToContactsPage();
     }
 
+    public void createWithoutNewContact(ContactData contact, GroupData group) {
+        //openNewContactsPage();
+        //fillContactsWithoutPhotoForm(contact);
+        selectContact(contact);
+        selectGroupForContact(group);
+        submitCreateContactInGroup();
+        //submitContactCreation();
+        //returnToContactsPage();
+    }
+
+    private void submitCreateContactInGroup() {
+        click(By.name("add"));
+    }
+
+    private void selectGroupForContact(GroupData group) {
+        new Select(manager.driver.findElement(By.name("to_group"))).selectByValue(group.id());
+    }
     private void selectGroup(GroupData group) {
         new Select(manager.driver.findElement(By.name("new_group"))).selectByValue(group.id());
     }
