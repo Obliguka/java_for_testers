@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -138,27 +139,47 @@ public class CreationContactTests extends TestBase {
   }
 
   @Test
-  public void canAddContactInGroup()
-  {
+  public void canAddContactInGroup() throws SQLException {
+    //Проверяем, есть ли вообще контакты и группы
     if (app.hbm().getContactCount()==0){
       app.hbm().createdContact(new ContactData("","",
               "", "", "","","",
               "","","", "", "", "", ""));
     }
 
-    var contact=app.hbm().getContactList().get(0);
-
-    if (app.hbm().getGroupCount()==0){
-      app.hbm().createdGroup(new GroupData("", "", "", ""));
+     if (app.hbm().getGroupCount()==0){
+     app.hbm().createdGroup(new GroupData("", "", "", ""));
     }
 
-    var group=app.hbm().getGroupList().get(0);
+     //Получаем текущие списки контактов и групп
+    var contacts=app.hbm().getContactList();
+    var groups=app.hbm().getGroupList();
 
+    //Проверяем есть ли у контакта связанная с ним группа или группы контакт. Проверяем в БД.
+    var group=app.jdbc().checkGroupInContact(groups);
+    if(group==null) {
+      app.hbm().createdGroup(new GroupData("","","",""));
+      groups=app.hbm().getGroupList();
+      group=app.jdbc().checkGroupInContact(groups);
+    }
+
+
+    var contact=app.jdbc().checkContactInGroup(contacts);
+    if(contact==null) {
+      app.hbm().createdContact(new ContactData("","",
+              "", "", "","","",
+              "","","", "", "", "", ""));
+      contacts=app.hbm().getContactList();
+      contact=app.jdbc().checkContactInGroup(contacts);
+    }
+
+    //Создаем связь контакт-группа
     var oldRelated=app.hbm().getContactsInGroup(group);
     app.contact().createWithoutNewContact(contact, group);
     var newRelated=app.hbm().getContactsInGroup(group);
     Assertions.assertEquals(oldRelated.size()+1,newRelated.size());
   }
+
 
   @ParameterizedTest
   @MethodSource("contactProvider")

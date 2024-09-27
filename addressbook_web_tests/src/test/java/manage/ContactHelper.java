@@ -242,4 +242,8 @@ public class ContactHelper extends HelperBase{
                         (String.format("//input[@id='%s']/../../td[4]", contact.id()))).
                 getText();
     }
+
+
+    public void checkGroupInContact(List<GroupData> groups) {
+    }
 }

@@ -1,5 +1,6 @@
 package manage;
 
+import model.ContactData;
 import model.GroupData;
 
 import java.sql.DriverManager;
@@ -57,5 +58,42 @@ public class JdbcHelper extends HelperBase{
         st.executeUpdate();
         st.close();
         conn.close();
+    }
+
+    public ContactData checkContactInGroup(List<ContactData> contacts) throws SQLException {
+        var conn=DriverManager.getConnection("jdbc:mysql://localhost/addressbook","root","");
+        for (var contact:contacts){
+            PreparedStatement st = conn.prepareStatement(String.format("SELECT* FROM address_in_groups WHERE id=%s", contact.id()));
+            var result=st.executeQuery();
+            if (!result.next()){
+                result.close();
+                st.close();
+                conn.close();
+                return contact;
+            }
+            result.close();
+            st.close();
+        }
+        conn.close();
+        return null;
+    }
+
+    public GroupData checkGroupInContact(List<GroupData> groups) throws SQLException {
+        var conn=DriverManager.getConnection("jdbc:mysql://localhost/addressbook","root","");
+        for (var group:groups){
+            PreparedStatement st = conn.prepareStatement(String.format("SELECT* FROM address_in_groups WHERE group_id=%s", group.id()));
+            var result=st.executeQuery();
+            if (!result.next()){
+                result.close();
+                st.close();
+                conn.close();
+                return group;
+            }
+            result.close();
+            st.close();
+        }
+        conn.close();
+        return null;
+
     }
 }

@@ -5,9 +5,19 @@ import okhttp3.OkHttpClient;
 public class HttpSessionHelper extends HelperBase{
 
 
-    public HttpSessionHelper(ApplicationManager manager) {
-        super(manager);
-    }
     OkHttpClient client;
 
+    public HttpSessionHelper(ApplicationManager manager) {
+        super(manager);
+        client = new OkHttpClient();
+    }
+
+
+    public void login(String username, String password) {
+
+    }
+
+    public boolean isLoggedIn() {
+        return false;
+    }
 }
