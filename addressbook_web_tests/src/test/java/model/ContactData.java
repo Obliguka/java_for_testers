@@ -16,7 +16,7 @@ public record ContactData(String id, String firstname, String middlename, String
     public ContactData withAddress(String address) {
         return new ContactData(this.id,this.firstname, this.middlename, this.lastname,
                 this.nickname,address,this.home,this.mobile,this.work,this.email, this.photo, this.secondary,
-                this.email2, "");
+                this.email2, this.email3);
     }
 
     public ContactData withLastName(String lastname) {
