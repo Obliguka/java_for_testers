@@ -17,6 +17,9 @@ dependencies {
    // implementation 'com.squareup.okhttp3:okhttp:{latest_version}'
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
     testImplementation("com.squareup.okhttp3:okhttp-urlconnection:4.11.0")
+    // https://mvnrepository.com/artifact/org.eclipse.angus/angus-mail
+    implementation 'org.eclipse.angus:angus-mail:2.0.2'
+
 
 }
 

@@ -14,6 +14,8 @@ public class ApplicationManager {
     private Properties properties;
     private SessionHelper sessionHelper;
     private HttpSessionHelper httpSessionHelper;
+    private ru.stqa.mantis.manager.JamesCliHelper JamesCliHelper;
+    private ru.stqa.mantis.manager.MailHelper MailHelper;
 
     public void init(String browser, Properties properties) {
         this.string = browser;
@@ -55,6 +57,19 @@ public class ApplicationManager {
             httpSessionHelper=new HttpSessionHelper(this);
         }
         return httpSessionHelper;
+    }
+
+    public JamesCliHelper jamesCli() {
+        if(JamesCliHelper==null){
+            JamesCliHelper=new JamesCliHelper(this);
+        }
+        return JamesCliHelper;
+    }
+    public MailHelper mail() {
+        if(MailHelper==null){
+            MailHelper=new MailHelper(this);
+        }
+        return MailHelper;
     }
 
     public String property(String name){
