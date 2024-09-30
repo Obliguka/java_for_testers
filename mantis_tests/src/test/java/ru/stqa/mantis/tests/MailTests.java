@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class MailTests extends TestBase{
     @Test
     void canDrainInbox(){
-        app.mail().drain("user1@localhost", "password");
+        app.mail().drain("testuser1@localhost", "password");
     }
 
     @Test
@@ -27,7 +27,7 @@ public class MailTests extends TestBase{
                 "password",
                 Duration.ofSeconds(10));
         var text=messages.get(0).content();
-        var pattern=Pattern.compile("http//\\S*");
+        var pattern=Pattern.compile("http://\\S*");
         var mattcher=pattern.matcher(text);
         if(mattcher.find()){
             var url=text.substring(mattcher.start(),mattcher.end());
