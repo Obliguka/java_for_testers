@@ -56,4 +56,9 @@ public class ApplicationManager {
         }
         return httpSessionHelper;
     }
+
+    public String property(String name){
+        return properties.getProperty(name);
+
+    }
 }

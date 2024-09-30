@@ -16,6 +16,7 @@ dependencies {
     testImplementation'org.seleniumhq.selenium:selenium-java:4.23.0'
    // implementation 'com.squareup.okhttp3:okhttp:{latest_version}'
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    testImplementation("com.squareup.okhttp3:okhttp-urlconnection:4.11.0")
 
 }
 

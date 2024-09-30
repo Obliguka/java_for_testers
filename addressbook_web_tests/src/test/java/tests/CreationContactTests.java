@@ -142,13 +142,13 @@ public class CreationContactTests extends TestBase {
   public void canAddContactInGroup() throws SQLException {
     //Проверяем, есть ли вообще контакты и группы
     if (app.hbm().getContactCount()==0){
-      app.hbm().createdContact(new ContactData("","",
+      app.contact().createdContact(new ContactData("","",
               "", "", "","","",
               "","","", "", "", "", ""));
     }
 
      if (app.hbm().getGroupCount()==0){
-     app.hbm().createdGroup(new GroupData("", "", "", ""));
+     app.groups().createdGroup(new GroupData("", "", "", ""));
     }
 
      //Получаем текущие списки контактов и групп
