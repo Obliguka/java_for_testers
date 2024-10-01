@@ -149,6 +149,7 @@ public class CreationContactTests extends TestBase {
 
      if (app.hbm().getGroupCount()==0){
      app.groups().createdGroup(new GroupData("", "", "", ""));
+     app.contact().openContactsPage();
     }
 
      //Получаем текущие списки контактов и групп

@@ -70,7 +70,7 @@ public class ContactHelper extends HelperBase{
         click(By.cssSelector(String.format("input[id='%s']", contact.id())));
     }
 
-    private void openContactsPage()
+    public void openContactsPage()
     {
         click(By.linkText("home"));
     }
