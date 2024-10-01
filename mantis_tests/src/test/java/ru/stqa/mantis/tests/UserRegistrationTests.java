@@ -40,7 +40,37 @@ public class UserRegistrationTests extends TestBase{
 
         app.mail().drain(email, "password");
 
-        //для действий через браузер нужно создать класс помощник
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"testuser9"})
+    void canCreateUser(String username) throws InterruptedException {
+        var email=String.format("%s@localhost",username);
+        app.jamesApi().addUser(email,"password");
+
+        //заполняем форму создания пользователя в браузере и отправляем Б
+        app.browser().fillFormForUsers(username,email);
+        Thread.sleep(1000);
+
+        //ждем почту (MailHelper)
+        var messages= app.mail().recieve(email,
+                "password",
+                Duration.ofSeconds(10));
+
+        //извлекаем ссылку
+        Thread.sleep(1000);
+        var url=app.mail().canExtractUrl(email, "password");
+        Assertions.assertEquals(1,messages.size());
+
+        //возвращаемся в браузер, проходим по ссылке Б
+        app.browser().finalRegistrationUser(username,"password", url);
+
+        //завершаем регистрацию
+        //проверяем что пользователь может залогиниться (HttpSessionHelper)
+        app.http().login(username, "password");
+        Assertions.assertTrue(app.http().isLoggedIn());
+
+        app.mail().drain(email, "password");
 
     }
 }

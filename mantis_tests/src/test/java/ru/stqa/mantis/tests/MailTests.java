@@ -14,7 +14,7 @@ public class MailTests extends TestBase{
 
     @Test
     void canRecieveEmail(){
-        var messages= app.mail().recieve("user1@localhost",
+        var messages= app.mail().recieve("testuser4@localhost",
                 "password",
                 Duration.ofSeconds(10));
         Assertions.assertEquals(1,messages.size());

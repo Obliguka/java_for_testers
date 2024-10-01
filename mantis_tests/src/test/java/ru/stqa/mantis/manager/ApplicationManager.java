@@ -17,6 +17,7 @@ public class ApplicationManager {
     private ru.stqa.mantis.manager.JamesCliHelper JamesCliHelper;
     private ru.stqa.mantis.manager.MailHelper MailHelper;
     private ru.stqa.mantis.manager.BrowserHelper BrowserHelper;
+    private ru.stqa.mantis.manager.JamesApiHelper JamesApiHelper;
 
     public void init(String browser, Properties properties) {
         this.string = browser;
@@ -66,6 +67,14 @@ public class ApplicationManager {
         }
         return JamesCliHelper;
     }
+
+    public JamesApiHelper jamesApi() {
+        if(JamesApiHelper==null){
+            JamesApiHelper=new JamesApiHelper(this);
+        }
+        return JamesApiHelper;
+    }
+
     public MailHelper mail() {
         if(MailHelper==null){
             MailHelper=new MailHelper(this);
