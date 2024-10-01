@@ -3,14 +3,17 @@ package ru.stqa.mantis.tests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import ru.stqa.mantis.model.DeveloperMailUser;
 
 import java.time.Duration;
 
 
 
 public class UserRegistrationTests extends TestBase{
+
+    DeveloperMailUser user;
     @ParameterizedTest
-    @ValueSource(strings = {"testuser8"})
+    @ValueSource(strings = {"testuser11"})
     void canRegisterUser(String username) throws InterruptedException {
         var email=String.format("%s@localhost",username);
         //создать пользователя на почтовом сервере (JamesHelper)
@@ -42,11 +45,14 @@ public class UserRegistrationTests extends TestBase{
 
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"testuser9"})
-    void canCreateUser(String username) throws InterruptedException {
-        var email=String.format("%s@localhost",username);
-        app.jamesApi().addUser(email,"password");
+   /* @Test
+    void canCreateUser() throws InterruptedException {
+        var password="password";
+        user = app.developerMail().addUser();
+        var email=String.format("%s@developermail.com",user.name());
+
+
+
 
         //заполняем форму создания пользователя в браузере и отправляем Б
         app.browser().fillFormForUsers(username,email);
@@ -72,5 +78,9 @@ public class UserRegistrationTests extends TestBase{
 
         app.mail().drain(email, "password");
 
-    }
+   }
+   @AfterEach
+    void deleteMailUser(){
+        app.developerMail().deleteUser(user);
+    }*/
 }

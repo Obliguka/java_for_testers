@@ -20,7 +20,7 @@ public class BrowserHelper extends HelperBase{
     }
 
     private void openLoginPage() {
-        manager.driver().get("http://localhost/mantisbt-2.26.3/login_page.php");
+        manager.driver().get(String.format("%s/login_page.php",manager.property("web.baseUrl")));
     }
 
     public void finalRegistrationUser(String username, String password, String url) {
