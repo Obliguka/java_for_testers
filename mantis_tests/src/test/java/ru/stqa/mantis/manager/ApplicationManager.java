@@ -19,6 +19,7 @@ public class ApplicationManager {
     private ru.stqa.mantis.manager.BrowserHelper BrowserHelper;
     private ru.stqa.mantis.manager.JamesApiHelper JamesApiHelper;
     private ru.stqa.mantis.manager.DeveloperMailHelper DeveloperMailHelper;
+    private ru.stqa.mantis.manager.RestApiHelper RestApiHelper;
 
     public void init(String browser, Properties properties) {
         this.string = browser;
@@ -100,5 +101,12 @@ public class ApplicationManager {
     public String property(String name){
         return properties.getProperty(name);
 
+    }
+
+    public RestApiHelper rest() {
+        if(RestApiHelper==null){
+            RestApiHelper=new RestApiHelper(this);
+        }
+        return RestApiHelper;
     }
 }

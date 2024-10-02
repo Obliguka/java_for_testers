@@ -102,4 +102,17 @@ public class MailHelper extends HelperBase{
             throw new RuntimeException("No email");
         }
     }
+
+    public String extractUrl(String message) {
+        var text=message;
+        var pattern= Pattern.compile("http://\\S*");
+        var mattcher=pattern.matcher(text);
+        if(mattcher.find()){
+            var url=text.substring(mattcher.start(),mattcher.end());
+            return url;
+        }
+        else {
+            throw new RuntimeException("No email");
+        }
+    }
 }

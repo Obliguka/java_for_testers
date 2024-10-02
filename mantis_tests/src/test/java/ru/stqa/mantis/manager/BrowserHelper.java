@@ -38,4 +38,6 @@ public class BrowserHelper extends HelperBase{
     private void openLink(String url) {
         manager.driver().get(url);
     }
+
+
 }
