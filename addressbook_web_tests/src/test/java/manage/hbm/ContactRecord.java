@@ -45,7 +45,7 @@ public class ContactRecord {
 
     public ContactRecord(){}
 
-    public ContactRecord(int id, String name, String header, String footer){
+    public ContactRecord(int id, String firstname, String lastname, String address){
 
         this.id = id;
         this.firstname = firstname;

@@ -37,7 +37,7 @@ public class RestApiHelper extends HelperBase{
         try {
             apiInstance.issueAdd(issue);
         } catch (ApiException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
 
     }
